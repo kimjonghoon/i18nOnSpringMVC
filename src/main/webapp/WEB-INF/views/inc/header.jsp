@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<header>
-	<div id="ci"><a href="/"><img src="/resources/images/ci.gif" alt="ci" /></a></div>
-	<div id="i18n">
+         pageEncoding="UTF-8"%>
 <%
 String url = "";
 String english = "";
@@ -21,7 +17,7 @@ if (qs != null) {
         url = "?" + decodedQueryString;
         if (url.indexOf("&lang=") != -1) {
             url = url.substring(0, url.indexOf("&lang="));
-        } 
+        }
         english = url + "&lang=en";
         korean = url + "&lang=ko";
     } else {
@@ -36,13 +32,8 @@ if (qs != null) {
 pageContext.setAttribute("english", english);
 pageContext.setAttribute("korean", korean);
 %>
-
-<a href="${english }">English</a> <a href="${korean }">Korean</a>		
-	</div>
-	<nav>
-		<ul id="main-menu">
-			<li><a href="/"><spring:message code="homepage" /></a></li>
-			<li><a href="/java"><spring:message code="java" /></a></li>
-		</ul>
-	</nav>
-</header>
+<div style="float: left;width: 150px;position: relative;top: 7px;"><a href="/"><img src="/resources/images/ci.gif" alt="java-school" /></a></div>
+<div id="localeChangeMenu" style="float: right;position: relative;top: 7px;">
+    <input type="button" value="English" onclick="location.href = '${english}'" />
+    <input type="button" value="Korean" onclick="location.href = '${korean }'" />
+</div>

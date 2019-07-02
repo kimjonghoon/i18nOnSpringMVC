@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC  
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="index" extends="app.default">
+		<put-attribute name="content" value="/WEB-INF/views/articles/java/JDK-Install.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/views/inc/home/sub.jsp" />
+		<put-list-attribute name="links" inherit="true">
+			<add-attribute value="/resources/css/windows.css" />
+		</put-list-attribute>
+	</definition>
+	<definition name="*/*" extends="app.default">
+		<put-attribute name="content" value="/WEB-INF/views/articles/{1}/{2}.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/views/inc/{1}/sub.jsp" />
+	</definition>
+</tiles-definitions>

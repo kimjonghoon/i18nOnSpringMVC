@@ -1,26 +1,55 @@
 package net.java_school.blog;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import net.java_school.exception.NotArticleFoundException;
 
 @Controller
 public class BlogController {
 
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	static final String[] articles = {"java/Features"};
+	static final String[] indexes = {};
+	
+	@GetMapping("/")
 	public String home() {
 		return "index";
 	}
-
-	@RequestMapping(value="{category}", method=RequestMethod.GET)
-	public String index(@PathVariable String category) {
-		return category + "/index";
+	
+	@GetMapping("/error")
+	public String error() {
+		return "error";
 	}
 
-	@RequestMapping(value="{category}/{id}", method=RequestMethod.GET)
+	@GetMapping("/404")
+	public String error404() {
+		return "404";
+	}
+
+	@GetMapping("{category}")
+	public String index(@PathVariable String category) {
+		String index = category + "/index";
+		Stream<String> stream = Arrays.stream(indexes);
+		boolean matched = stream.anyMatch(s -> s.equals(indexes));
+		if (matched == false) {
+			throw new NotArticleFoundException();
+		}
+		return index;
+	}
+
+	@GetMapping("{category}/{id}")
 	public String getPost(@PathVariable String category, @PathVariable String id) {
-		return category + "/" + id;
+		String article = category + "/" + id;
+		Stream<String> stream = Arrays.stream(articles);
+		boolean matched = stream.anyMatch(s -> s.equals(article));
+		if (matched == false) {
+			throw new NotArticleFoundException();
+		}
+		return article;
 	}
 
 }

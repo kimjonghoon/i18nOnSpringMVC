@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC  
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="app.default" template="/WEB-INF/views/layouts/main-layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
+		<put-attribute name="main-menu" value="/WEB-INF/views/inc/main-menu.jsp" />
+		<put-attribute name="extra" value="/WEB-INF/views/inc/extra.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/inc/footer.jsp" />
+		<put-list-attribute name="links">
+			<add-attribute value="/resources/css/screen.css" />
+			<add-attribute value="/resources/css/print.css" />
+			<add-attribute value="/resources/css/prettify.css" />
+		</put-list-attribute>
+		<put-list-attribute name="scripts">
+			<add-attribute value="/resources/js/jquery-3.2.1.min.js" />
+			<add-attribute value="/resources/js/commons.js" />
+			<add-attribute value="/resources/js/prettify.js" />
+			<add-attribute value="/resources/js/javaschool-prettify.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="index" extends="app.default">
+		<put-attribute name="content" value="/WEB-INF/views/articles/java/JDK-Install_en.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/views/inc/home/sub.jsp" />
+		<put-list-attribute name="links" inherit="true">
+			<add-attribute value="/resources/css/windows.css" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="error" extends="app.default">
+		<put-attribute name="content" value="/WEB-INF/views/error/error.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/views/inc/error/sub.jsp" />
+	</definition>
+
+	<definition name="404" extends="app.default">
+		<put-attribute name="content" value="/WEB-INF/views/error/404.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/views/inc/error/sub.jsp" />
+	</definition>
+		
+	<definition name="*/*" extends="app.default">
+		<put-attribute name="content" value="/WEB-INF/views/articles/{1}/{2}_en.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/views/inc/{1}/sub.jsp" />
+	</definition>
+	
+</tiles-definitions>
